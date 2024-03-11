@@ -40,10 +40,9 @@ function start(){
 
 
                                                         // putting the start operation so that we can call it again after the game ends.
+heading3.addEventListener('click',start);
 
-  document.addEventListener('Onclick',start);
   document.addEventListener('keydown',start);
-
 
 function setCol(btn){
   btn.classList.add("flash");    //the button will have this class for some period of time
@@ -57,26 +56,25 @@ function setCol(btn){
   function checkans(){
     if(userSeq[userSeq.length-1]===gameSeq[userSeq.length-1]){                     //userSeq.length-1 is taken so that we can compare on every click.
       if(gameSeq.length==userSeq.length){                                          // after checking all the elements of the arrays, level will increase.
-       setTimeout(levelUp(),900);
+        setTimeout(function() {
+          levelUp();
+      }, 600);
+      
       }
     }
-
     else {
-      heading3.innerHTML=`Game over. Your score is:<b> ${count -1}</b>.<br> Press any key to start`;
-        if(level==1){
-          count==0;
+           heading3.innerHTML=`Game over. Your score is:<b> ${count -1}</b><br> Press here to start`;
            reset();
-        }
-        reset();
       }
     }
 
   function reset(){
+   // heading3.innerHTML=`Game over. Your score is: ${count -1}`;
     started='false';                           //so that we can start the game again
     level=0;
-    if(highScore<count){
-    highScore=count;
-    }
+    // if(highScore<count){
+    // highScore=count;
+    // }
     count=0;
     gameSeq=[];
     userSeq=[];
