@@ -41,7 +41,7 @@ function start(){
 
                                                         // putting the start operation so that we can call it again after the game ends.
 
-  document.addEventListener('Onclick',start);
+  document.addEventListener('click',start);
   document.addEventListener('keydown',start);
 
 
