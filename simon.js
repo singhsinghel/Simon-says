@@ -19,28 +19,30 @@ let bts=['a','b','c','d'];
 let high=document.createElement('b');
 
 body.appendChild(high); 
+function start(){
 
+  if(started=="false"&& flag==1) {                               // it will make sure that keydown will be disables after the game will start.
+  ashu.innerText="☠️Player one's turn☠️";
+  body.classList.add('man');
+  body.classList.remove('girl');
+  flag=0;
+    started="true";
+  levelUp();}
 
-function new1(){                                         // putting the start operation so that we can call it again after the game ends.
-document.addEventListener('keydown',function(){
-    if(started=="false"&& flag==1) {                               // it will make sure that keydown will be disables after the game will start.
-    ashu.innerText="☠️Player one's turn☠️";
-    body.classList.add('man');
-    body.classList.remove('girl');
-    flag=0;
+  else if(started=="false"&& flag==0) {                               // it will make sure that keydown will be disables after the game will start.
+    ashu.innerText="🌟Player two,s turn🌟";
+    body.classList.add('girl');
+    body.classList.remove('man')
+        flag=1;
       started="true";
     levelUp();}
-
-    else if(started=="false"&& flag==0) {                               // it will make sure that keydown will be disables after the game will start.
-      ashu.innerText="🌟Player two,s turn🌟";
-      body.classList.add('girl');
-      body.classList.remove('man')
-          flag=1;
-        started="true";
-      levelUp();}
-});
 }
- new1();
+
+
+                                                        // putting the start operation so that we can call it again after the game ends.
+
+  document.addEventListener('Onclick',start);
+  document.addEventListener('keydown',start);
 
 
 function setCol(btn){
@@ -60,15 +62,16 @@ function setCol(btn){
     }
 
     else {
-        if(level==1){count==0;
+      heading3.innerHTML=`Game over. Your score is:<b> ${count -1}</b>.<br> Press any key to start`;
+        if(level==1){
+          count==0;
            reset();
         }
-       else reset();
+        reset();
       }
     }
 
   function reset(){
-    heading3.innerHTML=`Game over. Your score is:<b> ${count}</b>.<br> Press any key to start`;
     started='false';                           //so that we can start the game again
     level=0;
     if(highScore<count){
@@ -77,14 +80,6 @@ function setCol(btn){
     count=0;
     gameSeq=[];
     userSeq=[];
-    new1();                                  // calling the start function again so that game can restart.
-  }
-
-
-  function userFlsh(btn){
-   let usercol=btn.getAttribute('id');            // to select the individual id of each element
-    userSeq.push(usercol);
-    checkans();
   }
 
   function levelUp(){
@@ -97,8 +92,14 @@ function setCol(btn){
     heading3.innerText=`Level ${level}`;   
     setCol(iclass);
  };
+ function userFlsh(btn){
+  let usercol=btn.getAttribute('id');            // to select the individual id of each element
+   userSeq.push(usercol);
+   checkans();
+ }
+
 let count=0;
- function btnClick(){  
+function btnClick(){  
    count++;
    if(highScore<=count){
      highScore=count;
@@ -109,6 +110,6 @@ let count=0;
 
 for(btn of allbtn){
  btn.addEventListener('click',btnClick);
+}
 
-};
 
